@@ -18,7 +18,7 @@ node {
     stage('Deploy') {
           checkout scm
           sh 'docker run --rm -v /var/jenkins_home/workspace/submission-cicd-pipeline-tegarnauf_19/sources:/src cdrx/pyinstaller-linux:python2 \'pyinstaller -F add2vals.py\''
-          archiveArtifacts 'dist/add2vals'
+          archiveArtifacts 'sources/add2vals'
           sleep(60)
     }
 }
