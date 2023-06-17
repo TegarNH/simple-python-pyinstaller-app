@@ -15,7 +15,7 @@ node {
     stage('Manual Approval') {
         input 'Lanjutkan ke tahap Deploy? (Klik "Proceed" untuk melanjutkan)'
     }
-    withDockerContainer('cdrx/pyinstaller-linux:python2') {
+    withDockerContainer('six8/pyinstaller-alpine-linux-amd64:alpine-3.12-python-2.7-pyinstaller-v3.4') {
         stage('Deploy') {
           sh 'pyinstaller --onefile sources/add2vals.py'
           archiveArtifacts artifacts: 'dist/add2vals'
