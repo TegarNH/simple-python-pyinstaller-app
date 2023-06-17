@@ -15,11 +15,11 @@ node {
     stage('Manual Approval') {
         input 'Lanjutkan ke tahap Deploy? (Klik "Proceed" untuk melanjutkan)'
     }
-    withDockerContainer('six8/pyinstaller-alpine-linux-amd64:alpine-3.12-python-2.7-pyinstaller-v3.4') {
-        stage('Deploy') {
-          sh 'pyinstaller --onefile sources/add2vals.py'
-          archiveArtifacts artifacts: 'dist/add2vals'
-        }
+    stage('Deploy') {
+          checkout scm
+          sh 'docker run --rm -v /var/jenkins_home/workspace/submission-cicd-pipeline-tegarnauf_19/sources:/src cdrx/pyinstaller-linux:python2 \'pyinstaller -F add2vals.py\''
+          archiveArtifacts 'dist/add2vals'
+          sleep(60)
     }
 }
 
