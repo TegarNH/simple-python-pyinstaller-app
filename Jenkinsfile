@@ -16,10 +16,14 @@ node {
         input 'Lanjutkan ke tahap Deploy? (Klik "Proceed" untuk melanjutkan)'
     }
     stage('Deploy') {
-        docker.image('cdrx/pyinstaller-linux:python2').inside {
+        // docker.image('cdrx/pyinstaller-linux:python2').inside {
+        //     sh 'pyinstaller --onefile sources/add2vals.py'
+        //     archiveArtifacts 'dist/add2vals'
+        //     sleep(60)
+        // }
+        withDockerContainer('cdrx/pyinstaller-linux:python2') {
             sh 'pyinstaller --onefile sources/add2vals.py'
             archiveArtifacts 'dist/add2vals'
-            sleep(60)
         }
     }
 }
